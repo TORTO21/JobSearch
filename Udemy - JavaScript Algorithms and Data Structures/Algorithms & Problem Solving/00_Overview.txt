@@ -1,0 +1,16 @@
+What is an algorithm
+
+A process or set of steps to acocomplish a certain task
+
+How do you improve?
+- Devise a plan for solving problems
+- Master common problems solving pattersn
+  - identify the category of the problem
+  - may have a recipe already known
+1. Understand the problem
+2. Explore concrete Examples
+3. Break it Down
+4. Solve/Simplify
+5. Look back and Refactor
+
+Book: How to Sovle it - George Polya
