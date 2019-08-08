@@ -37,3 +37,22 @@ var levelOrder = function(root, levels = [], level = 0) {
   
   return levels;
 };
+
+var levelOrderIter = function(root, level = 0) {
+  if (!root) return [];
+  
+  let levels = []; 
+  let queue = [[root, level]]; 
+  
+  while (queue.length) {  
+    let [currNode, level] = queue.shift();
+    
+    levels[level] = levels[level] || [];
+    levels[level].push(currNode.val);
+    
+    if (currNode.left) queue.push([currNode.left, level + 1]); 
+    if (currNode.right) queue.push([currNode.right, level + 1]);
+  }
+  
+  return levels;    
+};

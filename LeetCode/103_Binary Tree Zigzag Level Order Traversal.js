@@ -26,14 +26,14 @@
  * @return {number[][]}
  */
 
-var zigzagLevelOrder = function(root) {
+var zigzagLevelOrder = function(root, level = 0) {
   if (!root) return [];
   
   let levels = []; 
   let queue = []; 
-  queue.push([root, 0]);
+  queue.push([root, level]);
   
-  while (queue.length) {
+  while (queue.length) {  
       let [currNode, level] = queue.shift();
   
       levels[level] = levels[level] || [];

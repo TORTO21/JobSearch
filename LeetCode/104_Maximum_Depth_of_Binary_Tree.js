@@ -35,5 +35,4 @@ var maxDepth = function(root) {
   } else {
       return right + 1
   }
-  
 };
