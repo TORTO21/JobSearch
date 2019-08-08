@@ -19,33 +19,14 @@
 // ]
 
 const { Node, LinkedList } = require('./LinkedList')
+const { SampleTree } = require('./4.2_minimal_tree')
 
-
-
-class TreeNode {
-  constructor(val){
-    this.value = val
-    this.left = this.right = null
-  }
-}
-
-function buildBST(array) {
-  // let root = new TreeNode(array[ Math.floor(array.length / 2) ])
-  if (!array.length) return null
-  let midIdx = Math.floor(array.length / 2)
-  let root = new TreeNode(array[midIdx])
-  root.left = buildBST(array.slice(0, midIdx))
-  root.right = buildBST(array.slice(midIdx + 1))
-  
-  return root
-}
-
-let bst = buildBST([1, 3, 5, 8, 19, 23, 24, 31])
 
 function listOfDepths(root) {
   // built a queue with root in it
   // track levels
   let lists = []
+  // let queue = [[root, 0]] OR
   let queue = []
   queue.push([root, 0])
   // while queue is not empty
@@ -64,20 +45,22 @@ function listOfDepths(root) {
     //   lists[level].addToTail(currNode.value)
     // }
 
-    
+    // left before right
     if (currNode.left) queue.push([currNode.left, level + 1])
     if (currNode.right) queue.push([currNode.right, level + 1])
   }
   return lists
 }
 
-console.log(bst)
-console.log(listOfDepths(bst))
+console.log(SampleTree)
+console.log(listOfDepths(SampleTree))
 
 function listOfDepthsRecur(root, lists = [], level = 0) {
   if (!root) return lists;
   
   if (!lists[level]) lists[level] = new LinkedList()
+  // Or
+  // lists[level] = lists[level] || new LinkedList()
   lists[level].addToTail(root.value)
 
   listOfDepthsRecur(root.left, lists, level + 1)
@@ -87,4 +70,17 @@ function listOfDepthsRecur(root, lists = [], level = 0) {
 }
 
 console.log("==================================")
-console.log(listOfDepthsRecur(bst))
+console.log(listOfDepthsRecur(SampleTree))
+
+
+
+// Search a Binary Search Tree Choose BFS or DFS
+// If BFS, use a queue (or double stack queue for efficiency)
+// if DFS, use a stack
+
+// 0. return null if empty
+// 1. setup your variables, lists, collections, ADTs
+// 2. instantiate your stack/queue with the root
+// 3. "look" at your node ( e.i. stack.pop(), queue.shift() )
+// 4. do your logic
+// 5. push left child and right child

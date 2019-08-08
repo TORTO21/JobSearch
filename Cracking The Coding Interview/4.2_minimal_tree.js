@@ -31,3 +31,7 @@ function buildBST(array) {
 }
 
 console.log(buildBST([1, 3, 5, 8, 19, 23, 24, 31]))
+
+exports.TreeNode = TreeNode
+exports.buildBST = buildBST
+exports.SampleTree = buildBST([1, 3, 5, 8, 19, 23, 24, 31])

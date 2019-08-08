@@ -49,6 +49,12 @@ function hasRouteBetweenNodes(startNode, endNode) {
   return false
 }
 
+//  E ⟺ A ⟹ B
+//  ⬆︎    ⬇︎ ⬈
+//  F     C
+//        ⬇︎
+//        D
+
 console.log(hasRouteBetweenNodes(a, a)) // => true
 console.log(hasRouteBetweenNodes(a, e)) // => true
 console.log(hasRouteBetweenNodes(d, c)) // => false
