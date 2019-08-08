@@ -52,8 +52,18 @@ function listOfDepths(root) {
   while (queue.length) {
     // if linked list does not exist at level, create one, else add to tail
     [currNode, level] = queue.shift()
+
     lists[level] = lists[level] || new LinkedList()
     lists[level].addToTail(currNode.value)
+
+    // Same Code in If Block
+    // if (!lists[level]) {
+    //   lists[level] = new LinkedList()
+    //   lists[level].addToTail(currNode.value)
+    // } else {
+    //   lists[level].addToTail(currNode.value)
+    // }
+
     
     if (currNode.left) queue.push([currNode.left, level + 1])
     if (currNode.right) queue.push([currNode.right, level + 1])
