@@ -18,7 +18,7 @@
 // { 1 }
 // ]
 
-const { Node, LinkedList } = require('./LinkList')
+const { Node, LinkedList } = require('./LinkedList')
 
 
 
@@ -63,3 +63,18 @@ function listOfDepths(root) {
 
 console.log(bst)
 console.log(listOfDepths(bst))
+
+function listOfDepthsRecur(root, lists = [], level = 0) {
+  if (!root) return lists;
+  
+  if (!lists[level]) lists[level] = new LinkedList()
+  lists[level].addToTail(root.value)
+
+  listOfDepthsRecur(root.left, lists, level + 1)
+  listOfDepthsRecur(root.right, lists, level + 1)
+
+  return lists
+}
+
+console.log("==================================")
+console.log(listOfDepthsRecur(bst))
