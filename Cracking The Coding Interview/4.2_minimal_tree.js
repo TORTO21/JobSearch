@@ -30,7 +30,7 @@ function buildBST(array) {
   return root
 }
 
-console.log(buildBST([1, 3, 5, 8, 19, 23, 24, 31]))
+// console.log(buildBST([1, 3, 5, 8, 19, 23, 24, 31]))
 
 exports.TreeNode = TreeNode
 exports.buildBST = buildBST

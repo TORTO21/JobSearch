@@ -128,3 +128,4 @@ console.log(isBalancedRecur(BigTree))         // => true
 t2 = Date.now()
 console.log(`runtime of isBalancedRecur: ${(t2 - t1)} ms`)
 
+exports.isBalanced = isBalanced
