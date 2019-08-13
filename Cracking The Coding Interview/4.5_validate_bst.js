@@ -1,3 +1,5 @@
+// I AM ENOUGH
+
 // Implement a function to check if a binary tree is a binary search tree.
 
 // const { isBalanced } = require('./4.4_check_balanced')

@@ -27,7 +27,21 @@
 // Output: false
 // Explanation: The root node's value is 5 but its right child's value is 4.
 
-function isValidBST(root, lower = null, upper = null) {  //good way T(N) S(N)
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+
+ 
+function isValidBST(root, lower = null, upper = null) {
   if (!root) return true
 
   const rootVal = root.val
