@@ -156,3 +156,27 @@ console.log('=======================================')
 console.log(isValidBSTIter(SampleTree)) // => true
 console.log(isValidBSTIter(notBST))     // => false
 console.log(isValidBSTIter(notBST2))     // => false
+
+
+function isValidBSTInOrder(root) {
+  let stack = []
+  let inOrder 
+
+  while (stack.length || root != null) {
+    while (root !== null) {
+      stack.push(root)
+      root = root.left
+    }
+    root = stack.pop()
+    
+    if (root.value <= inOrder) return false
+    inOrder = root.value
+    root = root.right
+  }
+  return true
+}
+
+console.log('=======================================')
+console.log(isValidBSTInOrder(SampleTree)) // => true
+console.log(isValidBSTInOrder(notBST))     // => false
+console.log(isValidBSTInOrder(notBST2))     // => false
