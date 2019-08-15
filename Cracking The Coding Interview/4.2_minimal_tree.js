@@ -22,7 +22,6 @@ class TreeNode {
 }
 
 function buildBST(array) {
-  // let root = new TreeNode(array[ Math.floor(array.length / 2) ])
   if (!array.length) return null
   let midIdx = Math.floor(array.length / 2)
   let root = new TreeNode(array[midIdx])
