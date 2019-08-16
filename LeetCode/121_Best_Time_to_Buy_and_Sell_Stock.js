@@ -25,7 +25,6 @@ function maxProfit(prices) {
   let high = 0
   let low = Infinity
   let profit = 0
-  let bestDay = 0
 
   for (let i = 0; i < prices.length; i++) {
     if (prices[i] > high) high = prices[i]
@@ -33,10 +32,7 @@ function maxProfit(prices) {
       low = prices[i]
       high = prices[i]
     }
-    if (high - low > profit) {
-      profit = high - low
-      bestDay = i
-    }
+    if (high - low > profit) profit = high - low
   }
-  return bestDay
+  return profit
 };
