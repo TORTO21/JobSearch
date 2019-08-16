@@ -11,7 +11,7 @@ console.log(2.5 / 5)
 console.log(21 % 8)
 
 
-// bitwise oeprators are special
+// bitwise operators are special
 console.log(8 | 1)
 // they are converted to 32-bit integers (binary)
 console.log((8).toString(2))
