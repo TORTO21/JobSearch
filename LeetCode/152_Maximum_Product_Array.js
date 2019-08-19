@@ -53,19 +53,16 @@ function productFromAll(nums) {
 
 // console.log(maxProduct([-3,1,2,3,-1,4,2,-2,2,3]))
 console.log(maxProduct([-2,3,-4]))
-console.log(maxProduct([-3,1,2,3,-1,4,2,-2,2,3]))
 
 
 function maxProductSolution(nums) {
   if (!(nums.length)) return 0
 
-  let max = nums[0]
-  let currMax = max
-  let currMin = max
+  let max = currMax = currMin = nums[0]
   for (let i = 1; i < nums.length; i++) {
-    let runningMax = max
+    let prevMax = currMax
     currMax = Math.max(nums[i], currMax * nums[i], currMin * nums[i])
-    currMin = Math.min(nums[i], currMin * nums[i], runningMax * nums[i])
+    currMin = Math.min(nums[i], currMin * nums[i], prevMax * nums[i])
     max = Math.max(max, currMax)
   }
   return max
@@ -73,3 +70,4 @@ function maxProductSolution(nums) {
 
 console.log(maxProductSolution([-2,3,-4]))
 console.log(maxProductSolution([-3,1,2,3,-1,4,2,-2,2,3]))
+console.log(maxProductSolution([-3,0,1,-2]))
