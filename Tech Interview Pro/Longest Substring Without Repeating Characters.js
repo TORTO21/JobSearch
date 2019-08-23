@@ -13,7 +13,6 @@ function lengthOfLongestSubstring(string) {
   let start = 0
   let end = 0
   let size = 0
-  let currSize = 0
 
   while (end < string.length) {
     if (!seen.has(string[end])) {
@@ -25,7 +24,7 @@ function lengthOfLongestSubstring(string) {
       start++
     }
   }
-  
+
   return size
 }
 
