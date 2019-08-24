@@ -17,56 +17,52 @@
 
 // input: 
 
+
 function minWindow(s, t) {
-  if (t.length > s.length) return 
-  let minWin = ""
-  let minWinLength = Infinity
-  let left = right = null
-  let tChars = {}
-  let tLength = t.length
+  if (!s.length || !t.length) return ""
   
-  
+  const tChars = {}
   for (let char of t) {
     if (char in tChars) tChars[char]++
     else tChars[char] = 1
   }
+  
+  let right = left = 0
+  let tLength = t.length
+  let minWinLength = Infinity
+  let minWin = ""
 
-  let required = Object.keys(tChars).length
-  let formed = 0
-  let winCounts = {}
+  while (s[right]) {
+    let rightChar = s[right]
+    if (rightChar in tChars && --tChars[rightChar] >= 0) tLength--;
 
+    while (tLength === 0) {
+      let currLength = right - left + 1
+      if (currLength < minWinLength) {
+        minWin = s.slice(left, right + 1)
+        minWinLength = currLength
+      }
 
-  while (right < s.length)
-    console.log(left, right)
-    let sChar = s[right]
-    if (sChar in tChars) {
-      if (left === null) left = right
-      if (tChars[sChar]-- > 0) t.lengthength--
-      if (!t.lengthength) {
-        let subLength = right - left
-        console.log(subLength)
-        if (minWinLength > subLength) {
-          minWinLength = subLength
-          minWin = s.substring(left, subLength)
-        }
-        if (tChars[s[left]]++ > 0) t.lengthength++
-        
+      let leftChar = s[left];
+      if (leftChar in tChars && ++tChars[leftChar] > 0) tLength++;
+
+      left++
     }
+    right++
   }
-
   return minWin
-};
+}
 
-function minWindow2(s, t) {
-  if (!s.length || !t.length) return ""
+
+var minWindowSolution = function(s, t) {
   // if t is within s, we can return t
   if (s.includes(t)) return t;
   
   // create a lookup for letters and their counts in t
-  const tChars = {};
-  for (let char of t) {
-    if (char in tChars) tChars[char]++
-    else tChars[char] = 1
+  const lookupObj = {};
+  for (let i = 0; i < t.length; i++) {
+    if (lookupObj[t[i]] !== undefined) lookupObj[t[i]]++
+    else lookupObj[t[i]] = 1;
   }
   
   // create a left and right pointer
@@ -81,25 +77,28 @@ function minWindow2(s, t) {
   while (s[right]) {
     // grab the right character
     let rightChar = s[right];
-    // if the right pointer hits a char in the obj, decrease it's count
-    if (tChars[rightChar]-- !== undefined) {
+    // if the right pointer hits a char in the obj
+    if (lookupObj[rightChar] !== undefined) {
+      // decrease it's count
+      lookupObj[rightChar]--;
       // if that char count is at 0 or greater, we needed it, so decrease counter
-      (tChars[rightChar] >= 0) && counter--;
+      if (lookupObj[rightChar] >= 0) counter--;
     }
     // if counter is at 0, we have all the chars 
     while (counter === 0) {
       // check for smallest string
-      let currLength = right - left + 1
-      if (currLength < minLength) {
+      if (right - left + 1 < minLength) {
         minString = s.slice(left, right + 1);
-        minLength = currLength;
+        minLength = right - left + 1;
       }
       // grab the left character
       let leftChar = s[left];
-      // if we hit one of our chars, add one to the lookup
-      if (tChars[leftChar]++ !== undefined) {
+      // if we hit one of our chars
+      if (lookupObj[leftChar] !== undefined) {
+        // add one to the lookup
+        lookupObj[leftChar]++;
         // if we're at 1, we no longer have the chars needed so increase counter
-        if (tChars[leftChar] === 1) counter++;
+        if (lookupObj[leftChar] === 1) counter++;
       }
       // increase left pointer
       left++;
@@ -110,6 +109,8 @@ function minWindow2(s, t) {
   return minString;
 };
 
-console.log(minWindow2("ADOBECODEBANC", "ABC"))
+console.log(minWindow("ADOBECODEBANC", "ABC"))
+console.log(minWindow("ADOBECODEBANC", ""))
+console.log(minWindow("", ""))
 
 
