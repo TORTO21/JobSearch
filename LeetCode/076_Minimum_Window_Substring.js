@@ -15,8 +15,6 @@
  * @return {string}
  */
 
-// input: 
-
 
 function minWindow(s, t) {
   if (!s.length || !t.length) return ""
@@ -55,55 +53,37 @@ function minWindow(s, t) {
 
 
 var minWindowSolution = function(s, t) {
-  // if t is within s, we can return t
   if (s.includes(t)) return t;
   
-  // create a lookup for letters and their counts in t
   const lookupObj = {};
   for (let i = 0; i < t.length; i++) {
     if (lookupObj[t[i]] !== undefined) lookupObj[t[i]]++
     else lookupObj[t[i]] = 1;
   }
   
-  // create a left and right pointer
   let right = 0;
   let left = 0;
-  // and a counter to see if we've all characters
-  let counter = t.length; // will be at 0 when we have all the chars
-  // create minlength and minstring variables
+  let counter = t.length; 
   let minLength = Infinity;
   let minString = "";
-  // while right is within the string
   while (s[right]) {
-    // grab the right character
     let rightChar = s[right];
-    // if the right pointer hits a char in the obj
     if (lookupObj[rightChar] !== undefined) {
-      // decrease it's count
       lookupObj[rightChar]--;
-      // if that char count is at 0 or greater, we needed it, so decrease counter
       if (lookupObj[rightChar] >= 0) counter--;
     }
-    // if counter is at 0, we have all the chars 
     while (counter === 0) {
-      // check for smallest string
       if (right - left + 1 < minLength) {
         minString = s.slice(left, right + 1);
         minLength = right - left + 1;
       }
-      // grab the left character
       let leftChar = s[left];
-      // if we hit one of our chars
       if (lookupObj[leftChar] !== undefined) {
-        // add one to the lookup
         lookupObj[leftChar]++;
-        // if we're at 1, we no longer have the chars needed so increase counter
         if (lookupObj[leftChar] === 1) counter++;
       }
-      // increase left pointer
       left++;
     }
-    // increase right pointer
     right++;
   }
   return minString;
