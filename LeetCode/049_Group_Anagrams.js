@@ -20,18 +20,20 @@
  */
 
 function groupAnagrams(strs) {
-  if (!strs.length) return []
+  if (strs.length <= 1) return [strs]
   let anagrams = {}
-  let i = j = 0
+  anagrams[strs[0]] = [strs[0]]
 
-  anagrams[strs[strs.length - 1]] = [strs.pop()]
-
-  while (strs[j]) {
-    let word = strs.pop()
+  strLoop: for (let i = 1; i < strs.length; i++) {
     let bases = Object.keys(anagrams)
-    
-    anagrams[word] = [word]
-    j++
+    let currWord = strs[i]
+    for (let base of bases) {
+      if (isAnagram(currWord, base)) {
+        anagrams[base].push(currWord)
+        continue strLoop
+      }
+    }
+    anagrams[currWord] = [currWord]
   }
   return Object.values(anagrams)
 }
@@ -52,3 +54,54 @@ function isAnagram(word1, word2) {
 }
 
 console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+console.log(groupAnagrams([""]))
+
+
+function groupAnagramsSort(strs) {
+  let anagrams = {}
+    strs.map(str => {
+      let sortedStr = str.split('').sort().join('')
+      if (anagrams[sortedStr]) anagrams[sortedStr].push(str)
+      else anagrams[sortedStr] = [str]
+    })
+  return Object.values(anagrams)
+};
+
+console.log(groupAnagramsSort(["eat", "tea", "tan", "ate", "nat", "bat"]))
+console.log(groupAnagramsSort([""]))
+
+function groupAnagramsFast(strs) {
+  if (!strs.length) return []
+  // Map<String, List> ans = new HashMap<String, List>();
+  let anagrams = {}
+  // int[] count = new int[26];
+  charCts = new Array(26).fill(0)
+  // for (String s : strs) {
+  for (let word of strs) {
+    // Arrays.fill(count, 0);
+    for (let char in word) charCts[char]++
+    console.log(charCts)
+    // for (char c : s.toCharArray()) count[c - 'a']++;
+    let sb = ""
+    // StringBuilder sb = new StringBuilder("");
+    for (let i = 0; i < 26; i++) {
+      // for (int i = 0; i < 26; i++) {
+      sb += "#" + charCts[i]
+      // sb.append('#');
+      // sb.append(count[i]);
+    }
+    // }
+    let key = sb
+    console.log(key)
+    // String key = sb.toString();
+    if (!(key in anagrams)) anagrams[key] = []
+    // if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+    anagrams[key].push[word]
+    // ans.get(key).add(s);
+  }
+  return Object.values(anagrams)
+  return new ArrayList(ans.values());
+}
+
+// console.log(groupAnagramsFast(["eat", "tea", "tan", "ate", "nat", "bat"]))
+// console.log(groupAnagramsFast([""]))
