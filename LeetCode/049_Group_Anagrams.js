@@ -19,6 +19,7 @@
  * @return {string[][]}
  */
 
+// brute force
 function groupAnagrams(strs) {
   if (strs.length <= 1) return [strs]
   let anagrams = {}
@@ -59,18 +60,19 @@ console.log(groupAnagrams([""]))
 
 function groupAnagramsSort(strs) {
   let anagrams = {}
-    strs.map(str => {
+    strs.forEach(str => {
       let sortedStr = str.split('').sort().join('')
       if (anagrams[sortedStr]) anagrams[sortedStr].push(str)
       else anagrams[sortedStr] = [str]
     })
   return Object.values(anagrams)
-};
+}
 
 console.log(groupAnagramsSort(["eat", "tea", "tan", "ate", "nat", "bat"]))
 console.log(groupAnagramsSort([""]))
 
-function groupAnagramsFast(strs) {
+
+function groupAnagramsCountingSort(strs) {
   if (!strs.length) return []
   // Map<String, List> ans = new HashMap<String, List>();
   let anagrams = {}
@@ -103,5 +105,3 @@ function groupAnagramsFast(strs) {
   return new ArrayList(ans.values());
 }
 
-// console.log(groupAnagramsFast(["eat", "tea", "tan", "ate", "nat", "bat"]))
-// console.log(groupAnagramsFast([""]))
