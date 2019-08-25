@@ -15,12 +15,13 @@
  * @return {string}
  */
 
+// manachers
 function longestPalindrome(string) {
   let workStr = "!#";
   for (let char of string) workStr += char + "#"
   
   const posCts = []
-  let leftIdx = 0, rightIdx = 0, bestPal = 0, bestPalCtr = 0
+  let leftIdx = 0, rightIdx = 0, bestPalSize = 0, bestPalCtr = 0
 
   for (let i = 1; i < workStr.length; i++){
     posCts[i] = rightIdx > i ? Math.min(rightIdx - i, posCts[2 * leftIdx - i]) : 1
@@ -35,13 +36,13 @@ function longestPalindrome(string) {
       leftIdx = i;
       rightIdx = i + currPalSize
     }
-    if (bestPal < currPalSize) {
-      bestPal = currPalSize
+    if (bestPalSize < currPalSize) {
+      bestPalSize = currPalSize
       bestPalCtr = i
     }	
   }
-  let palIdx = (bestPalCtr - bestPal) / 2
-  let palLength = palIdx + bestPal - 1
+  let palIdx = (bestPalCtr - bestPalSize) / 2
+  let palLength = palIdx + bestPalSize - 1
   return string.substring(palIdx, palLength)
 }
 
