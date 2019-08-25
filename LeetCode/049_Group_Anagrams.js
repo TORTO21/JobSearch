@@ -73,35 +73,18 @@ console.log(groupAnagramsSort([""]))
 
 
 function groupAnagramsCountingSort(strs) {
-  if (!strs.length) return []
-  // Map<String, List> ans = new HashMap<String, List>();
   let anagrams = {}
-  // int[] count = new int[26];
-  charCts = new Array(26).fill(0)
-  // for (String s : strs) {
+  let charCts = new Array(26)
+  
   for (let word of strs) {
-    // Arrays.fill(count, 0);
-    for (let char in word) charCts[char]++
-    console.log(charCts)
-    // for (char c : s.toCharArray()) count[c - 'a']++;
-    let sb = ""
-    // StringBuilder sb = new StringBuilder("");
-    for (let i = 0; i < 26; i++) {
-      // for (int i = 0; i < 26; i++) {
-      sb += "#" + charCts[i]
-      // sb.append('#');
-      // sb.append(count[i]);
-    }
-    // }
-    let key = sb
-    console.log(key)
-    // String key = sb.toString();
-    if (!(key in anagrams)) anagrams[key] = []
-    // if (!ans.containsKey(key)) ans.put(key, new ArrayList());
-    anagrams[key].push[word]
-    // ans.get(key).add(s);
+    charCts.fill(0)
+    for (let char of word) charCts[char.charCodeAt(0) - 97]++
+    let charKey = charCts.join('')
+    if (!(charKey in anagrams)) anagrams[charKey] = []
+    anagrams[charKey].push(word)
   }
   return Object.values(anagrams)
-  return new ArrayList(ans.values());
 }
 
+console.log(groupAnagramsCountingSort(["eat", "tea", "tan", "ate", "nat", "bat"]))
+console.log(groupAnagramsCountingSort([""]))
