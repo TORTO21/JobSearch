@@ -32,7 +32,7 @@ function countSubstrings(s) {
   }
   return count;
 }
-
+  
 function countPalindromes(s, l, r){
   let count = 0
   while (l >= 0 && r < s.length && s[l] === s[r]) { count++; l--; r++ }
