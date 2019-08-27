@@ -35,25 +35,25 @@ function threeSum(nums) {
   return triples
 };
 
-
+// T(n^2 + n log(n)) => O(n^2)
 function threeSumSolution(nums) {
   let result = []
-  nums.sort((a, b) => a - b)
+  nums.sort((a, b) => a - b) // arrange in ascending order
   for (let i = 0; i < nums.length - 2; i++) {
     if (nums[i] > 0) break //if always positive, stop looping
-    if (i > 0 && nums[i] === nums[i - 1]) continue
+    if (i > 0 && nums[i] === nums[i - 1]) continue // skip logic if same value
     let low = i + 1
     let high = nums.length - 1
     while (low < high) {
       let triple = nums[i] + nums[low] + nums[high]
+      if (triple > 0) high--
+      if (triple < 0) low++
       if (triple === 0) {
         result.push([nums[i], nums[low], nums[high]])
-        low++; high--
-        while (low < high && nums[low] === nums[low - 1]) low++
-        while (low < high && nums[high] === nums[high + 1] ) high--
+        low++; high-- // then deal with duplicate values
+        while (nums[low] === nums[low - 1]) low++
+        while (nums[high] === nums[high + 1]) high--
       }
-      else if (triple > 0) high--
-      else if (triple < 0) low++
     }
   }
   return result
@@ -61,3 +61,5 @@ function threeSumSolution(nums) {
 
 console.log(threeSumSolution([-1, 0, 1, 2, -1, -4]))
 console.log(threeSumSolution([-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6]))
+console.log(threeSumSolution([-4]))
+console.log(threeSumSolution([]))
