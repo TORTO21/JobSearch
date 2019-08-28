@@ -33,7 +33,7 @@ function longestPalindrome(string) {
 
     let currPalSize = posCts[i]
     if (rightIdx < i + currPalSize) {
-      leftIdx = i;
+      leftIdx = i
       rightIdx = i + currPalSize
     }
     if (bestPalSize < currPalSize) {
