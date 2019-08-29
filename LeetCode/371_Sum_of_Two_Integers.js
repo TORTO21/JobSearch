@@ -25,6 +25,7 @@ function getSum(a, b) {
 
 console.log(getSum(1, 2))
 console.log(getSum(-2, 3))
+console.log(getSum(1000000000000000, 1000000000000000))
 
 function getSumRecur(a, b) {
   if (!b) return a
