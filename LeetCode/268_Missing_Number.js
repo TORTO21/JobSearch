@@ -50,11 +50,18 @@ console.log(missingNumber2([0, 1]))
 console.log(missingNumber2([]))
 
 
-function missingNumberBitManip(nums) {
-  return nums.reduce((prev,cur,idx) => prev ^ cur ^ idx, nums.length)
+const missingNumberBitManip = (nums) =>
+  nums.reduce((prev, cur, idx) => prev ^ cur ^ idx, nums.length)
+
+function missingNumberBitManipBreakDown(nums) {
+  return nums.reduce((prev,cur,idx) => {
+    console.log("prev:", prev, " cur:", cur, " prev & cur:", prev ^ cur, " idx:", idx, " out:", prev ^ cur ^ idx)
+    console.log(prev.toString(2), "     ", cur.toString(2), "     ", (prev ^ cur).toString(2))
+    return prev ^ cur ^ idx
+  }, nums.length)
 }
 
-console.log("==============")
+console.log("=================================")
 console.log(missingNumberBitManip([3,0,1]))
 console.log(missingNumberBitManip([9,6,4,2,3,5,7,0,1]))
 console.log(missingNumberBitManip([9,6,4,2,3,5,7,8,1]))
