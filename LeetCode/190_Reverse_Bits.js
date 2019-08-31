@@ -30,5 +30,6 @@
  */
 
 function reverseBits(n) {
-  
-};
+  return Number.parseInt(n.toString(2).split('').reverse().join('').padEnd(32, "0"), 2)
+}
+console.log(00000010100101000001111010011100)
