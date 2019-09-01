@@ -32,4 +32,15 @@
 function reverseBits(n) {
   return Number.parseInt(n.toString(2).split('').reverse().join('').padEnd(32, "0"), 2)
 }
-console.log(00000010100101000001111010011100)
+
+var reverseBitsManip = function(n) {
+  var result = 0
+  var count = 32
+
+  while (count--) {
+    result *= 2 // doubling result, shifts everything left and adds a 0. Could also use result = result << 1
+    result += n & 1 // sets the 1s place of result to 1 or 0 to match beginning of n
+    n /= 2 //halving result shifts everything right.  Could also use n = n >> 1
+  }
+  return result
+}
