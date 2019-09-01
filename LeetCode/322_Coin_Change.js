@@ -18,6 +18,6 @@
  * @return {number}
  */
 
-var coinChange = function(coins, amount) {
-    
-};
+function coinChange(coins, amount) {
+     
+}
