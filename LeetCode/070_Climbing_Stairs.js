@@ -63,7 +63,7 @@ console.log(climbStairsZablan(5))
 
 
 // T(n) S(1)
-function climbStairsFib(n) {
+function climbStairsDP(n) {
     if (n === 1) return 1
     let prev = 1
     let curr = 2
@@ -76,12 +76,12 @@ function climbStairsFib(n) {
 }
 
 console.log("============")
-console.log(climbStairsFib(0))
-console.log(climbStairsFib(1))
-console.log(climbStairsFib(2))
-console.log(climbStairsFib(3))
-console.log(climbStairsFib(4))
-console.log(climbStairsFib(5))
+console.log(climbStairsDP(0))
+console.log(climbStairsDP(1))
+console.log(climbStairsDP(2))
+console.log(climbStairsDP(3))
+console.log(climbStairsDP(4))
+console.log(climbStairsDP(5))
 
 
 // Fibonacci Formula
