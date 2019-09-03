@@ -20,9 +20,9 @@ function minWindow(s, t) {
   if (!s.length || !t.length) return ""
   
   const tChars = {}
-  for (let char of t) {
-    if (char in tChars) tChars[char]++
-    else tChars[char] = 1
+  for (let char = 0; char < t.length; char++) {
+    if (tChars[t[char]]) tChars[t[char]]++
+    else tChars[t[char]] = 1
   }
   
   let right = left = 0
@@ -89,8 +89,8 @@ var minWindowSolution = function(s, t) {
   return minString;
 };
 
-console.log(minWindow("ADOBECODEBANC", "ABC"))
-console.log(minWindow("ADOBECODEBANC", ""))
-console.log(minWindow("", ""))
+console.log(minWindow("ADOBECODEBANC", "ABC"))  //=> BANC
+console.log(minWindow("ADOBECODEBANC", ""))     //=> ""
+console.log(minWindow("", ""))                  //=> ""
 
 

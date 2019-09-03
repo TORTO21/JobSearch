@@ -47,7 +47,7 @@ function isAnagramFast(s, t) {
 
   let charCts = (object, string) => {
     for (let char = 0; char < string.length; char++) {
-      if (object[string[char]]) object[string[char]]++
+      if (string[char] in object) object[string[char]]++
       else object[string[char]] = 1
     }
   }
@@ -59,10 +59,10 @@ function isAnagramFast(s, t) {
   charCts(tChar, t)
   
   let keys = Object.keys(sChar)
-  
-  for (let k = 0; k < keys.length; k++) {
-    if (!tChar[keys[k]] || tChar[keys[k]] !== sChar[keys[k]]) return false
+  for (let key of keys) {
+    if (!(key in tChar) || tChar[key] !== sChar[key]) return false
   }
+
   return true
 };
 
