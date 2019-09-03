@@ -53,6 +53,7 @@ function coinChangeMemoArray(coins, amount, count = new Array(amount)) {
   return count[amount - 1]
 }
 
+console.log("=============")
 console.log(coinChangeMemoArray([1, 2, 5], 11))
 console.log(coinChangeMemoArray([1, 2], 11))
 console.log(coinChangeMemoArray([2], 3))
@@ -60,18 +61,17 @@ console.log(coinChangeMemoArray([], 3))
 // console.log(coinChange([3]))
 
 
-function coinChangeDP(coins, amount) {
-  let max = amount + 1;             
-  let dp = new Array(max).fill(max)
-  dp[0] = 0
-  for (let i = 1; i <= amount; i++) {
-    for (let j = 0; j < coins.length; j++) {
-      if (coins[j] <= i) {
-        dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+function coinChangeDP(coins, amount) {     
+  let values = new Array(amount + 1).fill(Infinity)
+  values[0] = 0
+  for (let val = 1; val <= amount; val++) {
+    for (let cIdx = 0; cIdx < coins.length; cIdx++) {
+      if (coins[cIdx] <= val) {
+        values[val] = Math.min(values[val], values[val - coins[cIdx]] + 1)
       }
     }
   }
-  return dp[amount] > amount ? -1 : dp[amount];
+  return values[amount] > amount ? -1 : values[amount]
 }
 
 console.log("================")
