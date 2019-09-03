@@ -32,3 +32,15 @@ console.log(isValid("(]"))     // => false
 console.log(isValid("([)]"))   // => flase
 console.log(isValid("{[]}"))   // => true
 console.log(isValid("})]"))    // => false
+
+function isValidMap(string) {
+  let stack = []
+  let containers = new Map([["(", ")"], ["{", "}"], ["[", "]"]])
+  for (let char of string) {
+    (containers.has(char)) && stack.push(char)
+    if ((char === ")" || char === "}" || char === "]")
+    && (char !== containers.get(stack.pop())))
+      return false
+  }
+  return stack.length === 0
+};
