@@ -71,11 +71,17 @@ var lengthOfLISDPFast = function(nums) {
 function insertLIS(lis, n) {
   const len = lis.length;
   if (len < 1 || n > lis[len - 1]) {
-    // console.log("exit 1"); return lis.push(n) }
+    // console.log("exit 1")
+    return lis.push(n)
+  }
   if (n < lis[0] && len === 1) {
-    // console.log("exit 2"); return lis[0] = n }
+    // console.log("exit 2")
+    return lis[0] = n
+  }
   if (n < lis[0] && len > 1) {
-    // console.log("exit 3"); return }
+    // console.log("exit 3")
+    return
+  }
   
   let left = 0;
   let right = len - 1;
@@ -91,11 +97,11 @@ function insertLIS(lis, n) {
 
 console.log("=============")
 console.log(lengthOfLISDPFast([10,9,2,5,3,7,101,18])) //=> 4
-// console.log(lengthOfLISDPFast([2,1,3,5,4,6,0]))       //=> 4
-// console.log(lengthOfLISDPFast([1,2]))                 //=> 2
-// console.log(lengthOfLISDPFast([2,2]))                 //=> 1
-// console.log(lengthOfLISDPFast([1,2,2,3,4]))           //=> 4
-// console.log(lengthOfLISDPFast([4,10,4,3,8,9]))        //=> 3
-// console.log(lengthOfLISDPFast([]))                    //=> 0
-// console.log(lengthOfLISDPFast([1]))                   //=> 1
-// console.log(lengthOfLISDPFast([18,55,66,2,3,54]))     //=> 3
+console.log(lengthOfLISDPFast([2,1,3,5,4,6,0]))       //=> 4
+console.log(lengthOfLISDPFast([1,2]))                 //=> 2
+console.log(lengthOfLISDPFast([2,2]))                 //=> 1
+console.log(lengthOfLISDPFast([1,2,2,3,4]))           //=> 4
+console.log(lengthOfLISDPFast([4,10,4,3,8,9]))        //=> 3
+console.log(lengthOfLISDPFast([]))                    //=> 0
+console.log(lengthOfLISDPFast([1]))                   //=> 1
+console.log(lengthOfLISDPFast([18,55,66,2,3,54]))     //=> 3
