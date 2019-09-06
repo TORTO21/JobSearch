@@ -27,5 +27,5 @@ def mapifyArgument(arg):
 def solution(modulesToBuild, dependencies):
     deps = mapifyArgument(dependencies)
         
-    # Type your solution here 
+    # Type your solution here
     pass

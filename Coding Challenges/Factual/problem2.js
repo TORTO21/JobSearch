@@ -1,4 +1,4 @@
-// Suppose we are trying to oranize a meeting between a list of clients in New York CountQueuingStrategy. Each client exists at a location (Xclient, Yclient), where Xclient and Yclient are integers. The clients can only travel along X or Y at a given time (not diagonally). The goal here is to choose a meeting location such that the total distance traveled by clients is minimized. Find this minimum total distance.CountQueuingStrategy
+// Suppose we are trying to oranize a meeting between a list of clients in New York. Each client exists at a location (Xclient, Yclient), where Xclient and Yclient are integers. The clients can only travel along X or Y at a given time (not diagonally). The goal here is to choose a meeting location such that the total distance traveled by clients is minimized. Find this minimum total distance.
 
 // Example 1:
 // [[1, 0], [1, 1]]
@@ -41,4 +41,5 @@ const distance = (pos1, pos2) => {
 
 
 
+console.log(solution([[1, 0], [1, 1]]))
 console.log(solution([[-4, 3], [-2, 1], [1, 0], [3, 2]]))
