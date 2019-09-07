@@ -19,6 +19,13 @@
  * @param {number} x
  * @return {number}
  */
-var reverse = function(x) {
-    
+function reverse(x) {
+  let sign = x < 0 ? "-" : ""
+  let reversed = Math.abs(x).toString().split('').reverse().join('')
+  if (Number(reversed) > Infinity) return 0
+  return Number(sign + reversed)
 };
+
+console.log(reverse(123))
+console.log(reverse(-123))
+console.log(reverse(120))
