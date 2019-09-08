@@ -34,14 +34,13 @@ console.log(reverse(120))
 
 function reverseMod(x) {
   const sign = Math.sign(x)
-  x *= sign
+  x = Math.abs(x)
   let reversed = 0
 
-  while (x > 9) {
-    reversed = (reversed + x % 10) * 10
+  while (x > 0) {
+    reversed = reversed * 10 + x % 10
     x = x / 10 | 0
   }
-  reversed += x
   if (reversed > 2**31) return 0
   return reversed * sign
 }
@@ -53,6 +52,7 @@ console.log(reverseMod(123))
 console.log(reverseMod(-123))
 console.log(reverseMod(120))
 console.log(reverseMod(-1))
+console.log(reverseMod(4294967294))
 console.log(reverseMod(429496729))
 
 
