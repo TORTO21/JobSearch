@@ -33,37 +33,21 @@ console.log(reverse(-123))
 console.log(reverse(120))
 
 function reverseMod(x) {
-  const isNegative = x < 0;
-  x = Math.abs(x);
-  
+  const sign = Math.sign(x)
+  x *= sign
   let reversed = 0
-  while (x !== 0) {
+
+  while (x > 9) {
     reversed = (reversed + x % 10) * 10
     x = x / 10 | 0
   }
-  reversed /= 10
+  reversed += x
   if (reversed > 2**31) return 0
-  return isNegative ? -reversed : reversed
+  return reversed * sign
 }
 
-// const reverse = function(x) {
-//   const isNegative = x < 0;
-//   x = Math.abs(x);
-//   let result = 0;
-  
-//   while (x) {
-//     const digit = x % 10;
-//     x = Math.floor(x / 10);
-//     result = result * 10 + digit;
-//   }
-  
-//   // restrict result to maintain settled overflow
-//   if (result > 2**31) {
-//     return 0;
-//   }
-  
-//   return isNegative ? -result : result;
-// };
+
+
 console.log("===========")
 console.log(reverseMod(123))
 console.log(reverseMod(-123))
@@ -72,16 +56,3 @@ console.log(reverseMod(-1))
 console.log(reverseMod(429496729))
 
 
-// class Solution {
-//   public int reverse(int num) {
-//      long revnum = 0;
-//       while (num != 0) {
-//         revnum = revnum * 10 + (num % 10);
-//           if(revnum >= Integer.MAX_VALUE || revnum <= Integer.MIN_VALUE){
-//               return 0;
-//           }
-//         num /= 10;
-//       }
-//       return (int) revnum;
-//   }
-// }
