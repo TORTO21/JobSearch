@@ -76,28 +76,27 @@ console.log(combinationSum4Recur([5, 6, 1], 8))
 console.log(combinationSum4Recur([1, 2], 3))
 
 
-function combinationSum4TD(nums, Target) {
+function combinationSum4DP(nums, target) {
   if (nums == null || nums.length == 0) return 0;
-  dp = new Array(Target + 1)
+  dp = new Array(target + 1).fill(0)
   //base case
   dp[0] = 1;
 
-  for (let target = 1; target <= Target; target++) {
-
-      for (let j = 0; j < nums.length; j++) {
-
-          if (target >= nums[j])
-              dp[target] += dp[target - nums[j]];
-      }
+  for (let i = 1; i <= target; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (i >= nums[j])
+        dp[i] += dp[i - nums[j]];
+        // console.log(i ,nums[j])
+    }
   }
-
-  return dp[Target];
+  // console.log(dp)
+  return dp[target];
 }
 
 console.log("==========")
-console.log(combinationSum4Recur([1, 2, 3], 4))
-console.log(combinationSum4Recur([5, 6, 1], 8))
-console.log(combinationSum4Recur([1, 2], 3))
+console.log(combinationSum4DP([1, 2, 3], 4))
+console.log(combinationSum4DP([5, 6, 1], 8))
+console.log(combinationSum4DP([1, 2], 3))
 
 
 /**
