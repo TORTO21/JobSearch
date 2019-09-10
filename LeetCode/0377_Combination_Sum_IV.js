@@ -32,9 +32,101 @@
  * @param {number} target
  * @return {number}
  */
+// function combinationSum4(nums, target) {
+//   let currNum = nums[0]
+//   if (curNum = target) return 
+//   if (target - currNum > 0) combinationSum4(nums, target - currNum)
+// };
+
 function combinationSum4(nums, target) {
-  
-};
+
+  if (nums === null || nums.length === 0) return 0
+  let memo = new Array(target + 1).fill(-1)
+  return combinationSum4Recur(nums, 0, target, memo);
+}
+
+function combinationSum4Recur(nums, target, i, memo) {
+  memo = memo || new Array(target + 1).fill(-1)
+  //Our constraints : We can't go beyond target, we can take more element than available in array
+  if (i >= nums.length) return 0
+
+  //3. Our goal: when currentSum = target
+  if (0 === target) return 1
+
+  if (memo[target] !== -1) return memo[target]
+
+  let result = 0;
+  //1. Our choices: We can choose a number from the list any number of times and all the numbers
+  for (let s = 0; s < nums.length; s++) {
+
+      //Our constraints : We can't go beyond target, we can take more element than available in array
+      if (target - nums[s] >= 0) {
+          target -= nums[s];
+          result += combinationSum4Recur(nums, target, s, memo);
+          //backtrack
+          target += nums[s];
+      }
+  }
+  return memo[target] = result;
+}
 
 
+console.log(combinationSum4Recur([1, 2, 3], 4))
+console.log(combinationSum4Recur([5, 6, 1], 8))
+console.log(combinationSum4Recur([1, 2], 3))
+
+
+function combinationSum4TD(nums, Target) {
+  if (nums == null || nums.length == 0) return 0;
+  dp = new Array(Target + 1)
+  //base case
+  dp[0] = 1;
+
+  for (let target = 1; target <= Target; target++) {
+
+      for (let j = 0; j < nums.length; j++) {
+
+          if (target >= nums[j])
+              dp[target] += dp[target - nums[j]];
+      }
+  }
+
+  return dp[Target];
+}
+
+console.log("==========")
+console.log(combinationSum4Recur([1, 2, 3], 4))
+console.log(combinationSum4Recur([5, 6, 1], 8))
+console.log(combinationSum4Recur([1, 2], 3))
+
+
+/**
+     * Recurrence relation
+     * *     comb[target] = {
+     * *         sum(comb[target - nums[i]]) target> 0
+     * *         1: when target=0,
+     * *     }
+     * Overlapping sub-problems; cache it
+     * Complexity: O(n*n)
+     * <p>
+     * Runtime: 0 ms, faster than 100.00% of Java online submissions for Combination Sum IV.
+     * Memory Usage: 34.2 MB, less than 100.00% of Java online submissions for Combination Sum IV.
+     */
+
+function combinationSum4(nums, target, currSum = 0, dp) {
+  dp = dp || new Array(target + 1).fill(-1)
+  if (currSum > target) return 0 //base case
+  if (target === currSum) return 1;
+  if (dp[currSum] != -1) return dp[currSum];
+
+  let result = 0;
+  for (let i = 0; i < nums.length; i++) //O(n)
+      result += combinationSum4(nums, target, currSum + nums[i], dp); //O(n)
+
+  return result;
+}
+
+console.log("===========")
 console.log(combinationSum4([1, 2, 3], 4))
+console.log(combinationSum4([5, 6, 1], 8))
+console.log(combinationSum4([1, 2], 3))
