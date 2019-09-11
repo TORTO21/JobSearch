@@ -51,14 +51,13 @@ function combinationSum4Recur(nums, target, i, memo) {
   let result = 0;
   //1. Our choices: We can choose a number from the list any number of times and all the numbers
   for (let s = 0; s < nums.length; s++) {
-
-      //Our constraints : We can't go beyond target, we can take more element than available in array
-      if (target - nums[s] >= 0) {
-          target -= nums[s];
-          result += combinationSum4Recur(nums, target, s, memo);
-          //backtrack
-          target += nums[s];
-      }
+    //Our constraints : We can't go beyond target, we can take more element than available in array
+    if (target - nums[s] >= 0) {
+      target -= nums[s];
+      result += combinationSum4Recur(nums, target, s, memo);
+      //backtrack
+      target += nums[s];
+    }
   }
   return memo[target] = result;
 }

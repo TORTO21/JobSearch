@@ -20,6 +20,8 @@ function longestPalindrome(string) {
   let workStr = "!#";
   for (let char of string) workStr += char + "#"
   
+  console.log(workStr)
+
   const posCts = []
   let leftIdx = 0, rightIdx = 0, bestPalSize = 0, bestPalCtr = 0
 
@@ -41,6 +43,7 @@ function longestPalindrome(string) {
       bestPalCtr = i
     }	
   }
+  console.log(posCts)
   let palIdx = (bestPalCtr - bestPalSize) / 2
   let palLength = palIdx + bestPalSize - 1
   return string.substring(palIdx, palLength)
@@ -53,3 +56,4 @@ console.log(longestPalindrome("aca")) //   #a# c #a#
 console.log(longestPalindrome("acca"))//  #a#c # #c#a#
 console.log(longestPalindrome("asdf"))
 console.log(longestPalindrome(""))
+
