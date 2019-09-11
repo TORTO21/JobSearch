@@ -38,13 +38,6 @@
 //   if (target - currNum > 0) combinationSum4(nums, target - currNum)
 // };
 
-function combinationSum4(nums, target) {
-
-  if (nums === null || nums.length === 0) return 0
-  let memo = new Array(target + 1).fill(-1)
-  return combinationSum4Recur(nums, 0, target, memo);
-}
-
 function combinationSum4Recur(nums, target, i, memo) {
   memo = memo || new Array(target + 1).fill(-1)
   //Our constraints : We can't go beyond target, we can take more element than available in array
@@ -84,9 +77,7 @@ function combinationSum4DP(nums, target) {
 
   for (let i = 1; i <= target; i++) {
     for (let j = 0; j < nums.length; j++) {
-      if (i >= nums[j])
-        dp[i] += dp[i - nums[j]];
-        // console.log(i ,nums[j])
+      if (i >= nums[j]) dp[i] += dp[i - nums[j]];
     }
   }
   // console.log(dp)
