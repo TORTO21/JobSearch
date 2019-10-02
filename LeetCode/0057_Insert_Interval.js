@@ -27,7 +27,6 @@ function insert(intervals, newInterval) {
   if (intervals.length === 1) {
     return intervals[0][0] > mergeEnd ? [newInterval, ...intervals] :
     intervals[0][1] < mergeStart ? [...intervals, newInterval] :
-    // intervals
     [[Math.min(mergeStart, intervals[0][0]), Math.max(mergeEnd, intervals[0][1])]]
   }
   for (let i = 0; i < intervals.length; i++) {
@@ -60,3 +59,6 @@ console.log(insert([[1,5]], [2,3]))                             //=> [[1,5]]
 console.log(insert([[1,5]], [2,7]))                             //=> [[1,7]]
 console.log(insert([[1,5]], [0,1]))                             //=> [[0,5]]
 console.log(insert([[1,5],[6,8]], [5,6]))                       //=> [[1,8]]
+console.log(insert([[1,5],[6,8]], [0,9]))                       //=> [[0,9]]
+console.log(insert([[1,2],[6,8], [10,12]], [5,9]))              //=> [[1,2], [5,9], [10,12]]
+
