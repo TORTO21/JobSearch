@@ -39,11 +39,22 @@
 
 function uniqueOccurrences(arr) {
   let counts = {}
-
   arr.forEach(num => {
-    if (counts[num]++) continue
+    if (counts[num]++) 1
     else counts[num] = 1
   })
+
+  counts = Object.values(counts)
+  let uniques = new Set()
+
+  for (let i = 0; i < counts.length; i++) {  
+    if (uniques.has(counts[i])) return false
+    uniques.add(counts[i])
+  }
+
+  return true
 };
 
-console.log(uniqueOccurrences([1,2,2,1,1,3]))
+console.log(uniqueOccurrences([1,2,2,1,1,3]))               // => true
+console.log(uniqueOccurrences([1,2]))                       // => false
+console.log(uniqueOccurrences([-3,0,1,-3,1,1,1,-3,10,0]))   // => true
