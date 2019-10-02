@@ -37,4 +37,10 @@ input = [
   'happy to be here'
 ]
 
+input2 = [
+  'writing code',
+  'code rocks'
+]
 console.log(generate_phrases(input))
+console.log(generate_phrases(input2))
+
