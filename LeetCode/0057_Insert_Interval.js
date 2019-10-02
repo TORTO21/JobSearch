@@ -20,5 +20,43 @@
  */
 
 function insert(intervals, newInterval) {
-  
+  const updatedIntervals = []
+  let mergeStart = newInterval[0]
+  let mergeEnd = newInterval[1]
+
+  if (intervals.length === 1) {
+    return intervals[0][0] > mergeEnd ? [newInterval, ...intervals] :
+    intervals[0][1] < mergeStart ? [...intervals, newInterval] :
+    // intervals
+    [[Math.min(mergeStart, intervals[0][0]), Math.max(mergeEnd, intervals[0][1])]]
+  }
+  for (let i = 0; i < intervals.length; i++) {
+    if (intervals[i][0] < mergeStart && intervals[i][1] > mergeEnd) mergeStart = Infinity
+    if (intervals[i][0] > mergeEnd && intervals[i][0] > mergeStart) {
+      updatedIntervals.push(newInterval)
+      mergeStart = Infinity
+    }
+    if (intervals[i][1] >= mergeStart) {
+      mergeStart = Math.min(mergeStart, intervals[i][0])
+      while (i < intervals.length - 1 && mergeEnd >= intervals[i + 1][0]) i++
+      mergeEnd = Math.max(mergeEnd, intervals[i][1])
+      updatedIntervals.push([mergeStart, mergeEnd])
+      mergeStart = Infinity
+    } else updatedIntervals.push(intervals[i])
+  }
+  if (mergeStart !== Infinity) updatedIntervals.push(newInterval)
+  return updatedIntervals
 };
+
+console.log(insert([[1,3],[6,9]], [2,5]))                       //=> [[1,5], [6,9]]
+console.log(insert([[1,2],[3,5],[6,7],[8,10],[12,16]], [4,8]))  //=> [[1,2], [3,10], [12,16]]
+console.log(insert([[1,2],[3,5]], [0,1]))                       //=> [[0,2], [3,5]]
+console.log(insert([[3,5],[6,7]], [1,2]))                       //=> [[1,2], [3,5], [6,7]]
+console.log(insert([[3,5],[6,7]], [8,9]))                       //=> [[3,5], [6,7], [8,9]]
+console.log(insert([[3,5],[8,9]], [6,7]))                       //=> [[3,5], [6,7], [8,9]]
+console.log(insert([[3,5],[8,9]], [0,0]))                       //=> [[0,0], [3,5], [8,9]]
+console.log(insert([[3,5],[8,9]], [3,5]))                       //=> [[3,5], [8,9]]
+console.log(insert([[1,5]], [2,3]))                             //=> [[1,5]]
+console.log(insert([[1,5]], [2,7]))                             //=> [[1,7]]
+console.log(insert([[1,5]], [0,1]))                             //=> [[0,5]]
+console.log(insert([[1,5],[6,8]], [5,6]))                       //=> [[1,8]]
