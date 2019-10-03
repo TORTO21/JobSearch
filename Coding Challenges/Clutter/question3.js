@@ -1,4 +1,4 @@
-// You need to travel between VRDisplayCapabilities, but some roads may have been blocked by a recent StorageManager. You want to check before you travel to make sure you avoid them. Given a map of the cities and their bidrectional roads, determine which roads are along any shortest path so you can check that they are not blocked.  The roads or edges are named using their 1-based index within the input Array.
+// You need to travel between nodes, but some roads may have been blocked. You want to check before you travel to make sure you avoid them. Given a map of the cities and their bidrectional roads, determine which roads are along any shortest path so you can check that they are not blocked.  The roads or edges are named using their 1-based index within the input Array.
 
 // For example, given  a map of g_nodes = 5 nodes, the starting nodes, ending nodes, and road lengths are:
 
