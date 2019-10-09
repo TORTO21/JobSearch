@@ -7,7 +7,7 @@
 
 
 // Input:
-// {"$id":"1","neighbors":[{"$id":"2","neighbors":[{"$ref":"1"},{"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},{"$ref":"1"}],"val":4}],"val":3}],"val":2},{"$ref":"4"}],"val":1}
+// {id:"1",neighbors:[{id:"2",neighbors:[{ref:"1"},{id:"3",neighbors:[{ref:"2"},{id:"4",neighbors:[{ref:"3"},{ref:"1"}],val:4}],val:3}],val:2},{ref:"4"}],val:1}
 
 // Explanation:
 // Node 1's value is 1, and it has two neighbors: Node 2 and 4.
@@ -50,10 +50,10 @@ var cloneGraph = function(node) {
 
       let copied = new Node(node.val, null);
       map.set(node, copied);
-      for (let i = 0; i < node.neighbors.length; i++) {
-          dfs(node.neighbors[i]);
+          for (let i = 0; i < node.neighbors.length; i++) {
+              dfs(node.neighbors[i]);
+          }
       }
-  }
   dfs(node);
 
 //use map to copy the neighbors if it exists
@@ -70,7 +70,11 @@ var cloneGraph = function(node) {
   return map.get(node);
 };
 
-// sample Graph {"$id":"1","neighbors":[{"$id":"2","neighbors":[{"$ref":"1"},{"$id":"3","neighbors":[{"$ref":"2"},{"$id":"4","neighbors":[{"$ref":"3"},{"$ref":"1"}],"val":4}],"val":3}],"val":2},{"$ref":"4"}],"val":1}
+ let graph2 = {id:"1",neighbors:[{id:"2",neighbors:[{ref:"1"},{id:"3",neighbors:[{ref:"2"},{id:"4",neighbors:[{ref:"3"},{ref:"1"}],val:4}],val:3}],val:2},{ref:"4"}],val:1}
+
+ //   1 --------- 2
+ //   |           |
+ //   3 --------- 4
 
 let node1 = new Node(1)
 let node2 = new Node(2)
@@ -83,6 +87,8 @@ node4.neighbors = [node1, node3]
 
 let graph = node1
 console.log(cloneGraph(graph))
+console.log("==========")
+console.log(cloneGraph(graph2))
 
 
 
