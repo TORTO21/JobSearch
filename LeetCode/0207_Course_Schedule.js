@@ -29,3 +29,44 @@
  */
 
 
+// aA solution
+function canFinish(numCourses, prerequisites) {
+  let prereq = buildGraph(prerequisites)
+  let totalCourses = Object.keys(prereq).length
+  let completed = new Set()
+
+  let eligibleCourseExists = true
+
+  while (eligibleCourseExists) {
+    eligibleCourseExists = false //a la bubble sort
+
+    for (let course in prereq) {
+      let everyPrereqMet = prereq[course].every(pre => completed.has(pre)) //Boolean
+      if (!completed.has(course) && everyPrereqMet) {
+        completed.add(course)
+        eligibleCourseExists = true
+      }
+    }
+  }
+  return completed.size === totalCourses
+}
+
+function buildGraph(list) {
+  let graph = {}
+  list.forEach(prerequisite => {
+    let [ course, pre ] = prerequisite.map(String) //converts nums to string
+    if (course in graph) {
+      graph[course].push(pre)
+    } else {
+      graph[course] = [ pre ]
+    }
+    if (!(pre in graph)) graph[pre] = []
+  })
+  return graph
+}
+
+console.log(canFinish(2, [[1,0]]))                // => true
+console.log(canFinish(2, [[1,0],[0,1]]))          // => false
+console.log(canFinish(5, [[0,1],[1,2],[2,0]]))    // => false
+
+
