@@ -68,5 +68,47 @@ function buildGraph(list) {
 console.log(canFinish(2, [[1,0]]))                // => true
 console.log(canFinish(2, [[1,0],[0,1]]))          // => false
 console.log(canFinish(5, [[0,1],[1,2],[2,0]]))    // => false
+console.log(canFinish(5, [[0,1],[1,2],[2,3]]))    // => true
+
+
+function canFinishTopological(numCourses, prerequisites) {
+  let goMap = [];
+  let inMap = [];
+  
+	prerequisites.forEach((pair) => {
+    goMap[pair[0]] ? goMap[pair[0]]++ : goMap[pair[0]] = 1
+    inMap[pair[1]] ? inMap[pair[1]]++ : inMap[pair[1]] = 1
+    console.log("+ goMap ",goMap)
+    console.log("- inMap ",inMap)
+	});
+  // console.log(prerequisites)
+	while (prerequisites.length > 0) {
+		let removed = false;
+		for (let i = 0; i < prerequisites.length; i++) {
+			let pair = prerequisites.shift();
+			if (!inMap[pair[0]]) {
+				goMap[pair[0]]--;
+				inMap[pair[1]]--;
+				removed = true;
+			} else {
+				prerequisites.push(pair);
+			}
+		}
+
+		if (!removed) break;
+	}
+
+	return prerequisites.length == 0;
+}
+
+console.log("===========")
+// console.log(canFinishTopological(2, [[1,0]]))                      // => true
+// console.log(canFinishTopological(2, [[1,0],[0,1]]))                // => false
+// console.log(canFinishTopological(3, [[0,1],[1,2],[2,0]]))          // => false
+// console.log(canFinishTopological(3, [[0,1],[1,2],[2,3]]))          // => true
+// console.log(canFinishTopological(3, [[0,1],[0,2],[3,0]]))          // => true
+// console.log(canFinishTopological(3, [[0,1],[3,0],[0,2]]))          // => true
+console.log(canFinishTopological(3, [[0,1],[0,2],[3,0],[3,2]]))    // => true
+// console.log(canFinishTopological(3, [[1,0],[2,0],[0,3],[2,3]]))    // => true
 
 
