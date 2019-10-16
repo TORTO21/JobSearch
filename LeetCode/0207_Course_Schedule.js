@@ -98,7 +98,7 @@ function canFinishTopological(numCourses, prerequisites) {
 	return prerequisites.length == 0;
 }
 
-console.log("===========")
+console.log("====================")
 // console.log(canFinishTopological(2, [[1,0]]))                      // => true
 // console.log(canFinishTopological(2, [[1,0],[0,1]]))                // => false
 // console.log(canFinishTopological(3, [[0,1],[1,2],[2,0]]))          // => false
@@ -112,29 +112,30 @@ console.log(canFinishTopological(4, [[0,1],[0,2],[3,0],[3,2]]))    // => true
 var canFinishBFS = function(numCourses, prerequisites) {
     if (!prerequisites.length || !prerequisites[0].length) return true;
     
-    let indegrees = new Array(numCourses).fill(0); // 0 -> n-1
+    let indegrees = new Array(numCourses).fill(0) // 0 -> n-1
     let graph = new Map(); //HashMap<Integer, int[]>
     let queue = [];
     
     for (let i = 0; i < prerequisites.length; i++) {
-        indegrees[prerequisites[i][0]] ++;
-        let key = prerequisites[i][1];
+        indegrees[prerequisites[i][0]]++
+        let key = prerequisites[i][1]
         if(graph.has(key)) {                
-            graph.set(key, graph.get(key).concat(prerequisites[i][0]));
+            graph.set(key, graph.get(key).concat(prerequisites[i][0]))
         } else {
-            graph.set(key, [prerequisites[i][0]]);
+            graph.set(key, [prerequisites[i][0]])
         }
     }
     
+    // track indexes with queue
     indegrees.forEach((indegree, index) => {
-        if (indegree === 0) queue.push(index);
+        if (indegree === 0) queue.push(index)
     })
     
     while (queue.length) {
-        let cur = queue.shift();
-        let courses = graph.get(cur);
+        let cur = queue.shift()
+        let courses = graph.get(cur)
         for (let i = 0; courses && i < courses.length; i++) { 
-            if (--indegrees[courses[i]] === 0) queue.push(courses[i]);
+            if (--indegrees[courses[i]] === 0) queue.push(courses[i])
         }
     }
 
@@ -143,7 +144,7 @@ var canFinishBFS = function(numCourses, prerequisites) {
 };
 
 
-console.log("===========")
+console.log("====================")
 console.log(canFinishBFS(2, [[1,0]]))                      // => true
 console.log(canFinishBFS(2, [[1,0],[0,1]]))                // => false
 console.log(canFinishBFS(3, [[0,1],[1,2],[2,0]]))          // => false
