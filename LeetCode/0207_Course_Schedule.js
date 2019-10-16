@@ -78,10 +78,7 @@ function canFinishTopological(numCourses, prerequisites) {
 	prerequisites.forEach((pair) => {
     goMap[pair[0]] ? goMap[pair[0]]++ : goMap[pair[0]] = 1
     inMap[pair[1]] ? inMap[pair[1]]++ : inMap[pair[1]] = 1
-    console.log("+ goMap ",goMap)
-    console.log("- inMap ",inMap)
 	});
-  // console.log(prerequisites)
 	while (prerequisites.length > 0) {
 		let removed = false;
 		for (let i = 0; i < prerequisites.length; i++) {
@@ -105,42 +102,53 @@ console.log("===========")
 // console.log(canFinishTopological(2, [[1,0]]))                      // => true
 // console.log(canFinishTopological(2, [[1,0],[0,1]]))                // => false
 // console.log(canFinishTopological(3, [[0,1],[1,2],[2,0]]))          // => false
-// console.log(canFinishTopological(3, [[0,1],[1,2],[2,3]]))          // => true
-// console.log(canFinishTopological(3, [[0,1],[0,2],[3,0]]))          // => true
-// console.log(canFinishTopological(3, [[0,1],[3,0],[0,2]]))          // => true
-console.log(canFinishTopological(3, [[0,1],[0,2],[3,0],[3,2]]))    // => true
-// console.log(canFinishTopological(3, [[1,0],[2,0],[0,3],[2,3]]))    // => true
+// console.log(canFinishTopological(4, [[0,1],[1,2],[2,3]]))          // => true
+// console.log(canFinishTopological(4, [[0,1],[0,2],[3,0]]))          // => true
+// console.log(canFinishTopological(4, [[0,1],[3,0],[0,2]]))          // => true
+console.log(canFinishTopological(4, [[0,1],[0,2],[3,0],[3,2]]))    // => true
+// console.log(canFinishTopological(4, [[1,0],[2,0],[0,3],[2,3]]))    // => true
 
 
-var canFinish = function(numCourses, prerequisites) {
-  if(!prerequisites.length || !prerequisites[0].length) return true;
-  let indegrees = new Array(numCourses).fill(0); // 0 -> n-1
-  let graph = new Map(); //HashMap<Integer, int[]>
-  let queue = [];
+var canFinishBFS = function(numCourses, prerequisites) {
+    if (!prerequisites.length || !prerequisites[0].length) return true;
+    
+    let indegrees = new Array(numCourses).fill(0); // 0 -> n-1
+    let graph = new Map(); //HashMap<Integer, int[]>
+    let queue = [];
+    
+    for (let i = 0; i < prerequisites.length; i++) {
+        indegrees[prerequisites[i][0]] ++;
+        let key = prerequisites[i][1];
+        if(graph.has(key)) {                
+            graph.set(key, graph.get(key).concat(prerequisites[i][0]));
+        } else {
+            graph.set(key, [prerequisites[i][0]]);
+        }
+    }
+    
+    indegrees.forEach((indegree, index) => {
+        if (indegree === 0) queue.push(index);
+    })
+    
+    while (queue.length) {
+        let cur = queue.shift();
+        let courses = graph.get(cur);
+        for (let i = 0; courses && i < courses.length; i++) { 
+            if (--indegrees[courses[i]] === 0) queue.push(courses[i]);
+        }
+    }
+
+    return indegrees.every(el => el === 0)
   
-  for(let i = 0; i < prerequisites.length; i++) {
-      indegrees[prerequisites[i][0]] ++;
-      let key = prerequisites[i][1];
-      if(graph.has(key)) {                
-          graph.set(key, graph.get(key).concat(prerequisites[i][0]));
-      } else {
-          graph.set(key, [prerequisites[i][0]]);
-      }
-  }
-  indegrees.forEach((indegree, index) => {
-      if(indegree === 0) queue.push(index);
-  });
-  while(queue.length) {
-      let cur = queue.shift();
-      let courses = graph.get(cur);
-      for(let i = 0; courses && i < courses.length; i++) { 
-          if(--indegrees[courses[i]] === 0) queue.push(courses[i]);
-      }
-  }
-  for(let i = 0; i < indegrees.length; i++) {
-      if(indegrees[i] !== 0) {
-          return false;
-      }
-  }
-  return true;
 };
+
+
+console.log("===========")
+console.log(canFinishBFS(2, [[1,0]]))                      // => true
+console.log(canFinishBFS(2, [[1,0],[0,1]]))                // => false
+console.log(canFinishBFS(3, [[0,1],[1,2],[2,0]]))          // => false
+console.log(canFinishBFS(4, [[0,1],[1,2],[2,3]]))          // => true
+console.log(canFinishBFS(4, [[0,1],[0,2],[3,0]]))          // => true
+console.log(canFinishBFS(4, [[0,1],[3,0],[0,2]]))          // => true
+console.log(canFinishBFS(4, [[0,1],[0,2],[3,0],[3,2]]))    // => true
+console.log(canFinishBFS(4, [[1,0],[2,0],[0,3],[2,3]]))    // => true
