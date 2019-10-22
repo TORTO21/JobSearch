@@ -46,7 +46,10 @@ var pacificAtlantic = function(matrix) {
 function reachesPacific(start, matrix) {
   // return true
   const DIRS = [[0,1],[0,-1][1,0],[-1,0]]
-
+  
+  let pacificApproach = []
+  let queue = []
+  
 }
 
 function reachesAtlantic(start, matrix) {
