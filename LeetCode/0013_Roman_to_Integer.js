@@ -46,5 +46,77 @@
  */
 
 var romanToInt = function(s) {
-    
+    let values = {
+      "I" : 1,
+      "V" : 5,
+      "X" : 10,
+      "L" : 50,
+      "C" : 100,
+      "D" : 500,
+      "M" : 1000,
+    }
+
+    let result = 0
+
+    for (let i = 0; i < s.length; i++) {
+      let currValue = s[i] in values ? values[s[i]] : 0
+      let nextValue = s[i + 1] ? s[i + 1] in values ? values[s[i + 1]] : 0 : 0
+      if (nextValue > currValue) {
+        result += nextValue - currValue
+        i++
+      } else {
+        result += currValue
+      }
+    }
+
+    return result
 };
+
+console.log(romanToInt("I"))          //=> 1
+console.log(romanToInt("V"))          //=> 5
+console.log(romanToInt(""))           //=> 0
+console.log(romanToInt("III"))        //=> 3
+console.log(romanToInt("IV"))         //=> 4
+console.log(romanToInt("IX"))         //=> 9
+console.log(romanToInt("LVIII"))      //=> 58
+console.log(romanToInt("MCMXCIV"))    //=> 1994
+console.log(romanToInt("IIIV"))       //=> 6
+console.log(romanToInt("IIIVX"))      //=> 16
+
+var romanToInt2 = function(s) {
+  let values = {
+    "I" : 1,
+    "V" : 5,
+    "X" : 10,
+    "L" : 50,
+    "C" : 100,
+    "D" : 500,
+    "M" : 1000,
+  }
+
+  let result = 0
+  let lastValue = 0
+
+  for (let i = 0; i < s.length; i++) {
+    let char = s[i]
+    let value = char in values ? values[char] : 0
+    result += value
+    if (value > lastValue) result -= lastValue * 2
+    // result = value > lastValue ? result + value - lastValue * 2 : result + value
+    lastValue = value
+  }
+
+  return result
+};
+
+console.log("================")
+console.log(romanToInt2("I"))          //=> 1
+console.log(romanToInt2("V"))          //=> 5
+console.log(romanToInt2(""))           //=> 0
+console.log(romanToInt2("III"))        //=> 3
+console.log(romanToInt2("IV"))         //=> 4
+console.log(romanToInt2("IX"))         //=> 9
+console.log(romanToInt2("LVIII"))      //=> 58
+console.log(romanToInt2("MCMXCIV"))    //=> 1994
+console.log(romanToInt2("IIIV"))       //=> 6
+console.log(romanToInt2("IIIVX"))      //=> 6
