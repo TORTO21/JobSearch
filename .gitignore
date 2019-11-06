@@ -4,3 +4,7 @@
 /Direct\ Emails/
 /Metrics/
 /Templates/
+
+
+/config/keys_dev.js
+*/node_modules
