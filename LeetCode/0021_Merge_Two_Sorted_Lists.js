@@ -54,6 +54,23 @@ var mergeTwoLists = function(l1, l2) {
 	return mergedHead
 };
 
+
+var mergeTwoLists = function(l1, l2) {
+	if (l1 === null && l2 === null) return null
+	if (l1 === null) return l2
+	if (l2 === null) return l1
+
+	let mergedList = new ListNode()
+	let mergedHead = mergedList
+
+	while (l1 && l2) {
+		
+	}
+
+	return mergedHead
+};
+
+
 let list1 = new ListNode(1)
 list1.next = new ListNode(2)
 list1.next.next = new ListNode(4)
