@@ -55,19 +55,16 @@ var mergeTwoLists = function(l1, l2) {
 };
 
 
-var mergeTwoLists = function(l1, l2) {
-	if (l1 === null && l2 === null) return null
-	if (l1 === null) return l2
-	if (l2 === null) return l1
+var mergeTwoListsRecurs = function(l1, l2) {
+		if (!l1 || !l2) return l1 ? l1 : l2 ? l2 : l1
 
-	let mergedList = new ListNode()
-	let mergedHead = mergedList
-
-	while (l1 && l2) {
-		
-	}
-
-	return mergedHead
+		if (l1.val > l2.val) {
+				l2.next = mergeTwoListsRecurs(l1, l2.next)
+				return l2
+		} else {
+				l1.next = mergeTwoListsRecurs(l2, l1.next)
+				return l1
+		}
 };
 
 
@@ -81,6 +78,7 @@ list2.next.next = new ListNode(4)
 
 let list3 = mergeTwoLists(list1, list2)
 let list4 = new ListNode(10)
+let list5 = new ListNode(20)
 
 const listVals = (node) => {
 	while (node) {
@@ -91,4 +89,7 @@ const listVals = (node) => {
 
 listVals(list3)
 console.log("=================")
-listVals(mergeTwoLists(list3, list4))
+// listVals(mergeTwoLists(list3, list4))
+listVals(mergeTwoListsRecurs(list3, list4))
+console.log("=================")
+listVals(mergeTwoListsRecurs(list4, list5))
