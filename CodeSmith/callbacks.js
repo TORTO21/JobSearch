@@ -66,47 +66,67 @@ const add = function(a, b) { return a + b; }
 console.log(reduce(nums, add, 0))   //-> 8
 
 //Extension 3
-function intersection(arrays) {
-	
+function intersection(...arrays) {
+  return arrays.reduce((intersects, currArray) => {
+    return intersects.filter(ele => currArray.indexOf(ele) > -1)
+  })
 }
+// O(n^2)
 
-// console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
+console.log(intersection([5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]));
 // should log: [5, 15]
 
 //Extension 4
-function union(arrays) {
-
+function union(...arrays) {
+	let unitedSet = new Set()
+  arrays.forEach(array => array.forEach(ele => unitedSet.add(ele)))
+  return Array.from(unitedSet)
 }
 
-// console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
+console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
 // should log: [5, 10, 15, 88, 1, 7, 100]
 
 //Extension 5
 function objOfMatches(array1, array2, callback) {
-
+	let matches = {}
+  array1.forEach(ele => {
+  	const i = array2.indexOf(callback(ele))
+    if (i > -1) matches[ele] = array2[i]
+  })
+  return matches
 }
 
-// console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
+console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
 // should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
 
 //Extension 6
 function multiMap(arrVals, arrCallbacks) {
-
+	let valueMods = {}
+  arrVals.forEach(val => {
+    let mods = []
+    arrCallbacks.forEach(callback => mods.push(callback(val)))
+    valueMods[val] = mods
+  })
+  return valueMods
 }
 
-// console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
+console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
 
 
 //Extension 7
 function objectFilter(obj, callback) {
-
+	let filteredObj = {}
+  Object.keys(obj).forEach(key => {
+    if (obj[key] === callback(key)) filteredObj[key] = obj[key]
+  })
+  return filteredObj
 }
 
-// const cities = {
-// London: 'LONDON',
-// LA: 'Los Angeles',
-// Paris: 'PARIS',
-// };
-// console.log(objectFilter(cities, city => city.toUpperCase())) // Should log { London: 'LONDON', Paris: 'PARIS'}
+const cities = {
+London: 'LONDON',
+LA: 'Los Angeles',
+Paris: 'PARIS',
+};
+console.log(objectFilter(cities, city => city.toUpperCase())) // Should log { London: 'LONDON', Paris: 'PARIS'}
 
