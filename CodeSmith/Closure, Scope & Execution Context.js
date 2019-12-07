@@ -161,3 +161,38 @@ const subFrom20 = defineFirstArg(subtract, 20);
 console.log(subFrom20(5)); // should log: 15
 
 
+// ADD CODE HERE
+function dateStamp(callback) {
+  const log = {}
+  return (...args) => {
+    log.date = new Date().toDateString()
+    log.output = callback(...args)
+  	return log
+  }
+}
+// Uncomment these to check your work!
+const stampedMultBy2 = dateStamp(n => n * 2);
+console.log(stampedMultBy2(4)); // should log: { date: (today's date), output: 8 }
+console.log(stampedMultBy2(6)); // should log: { date: (today's date), output: 12 }
+
+
+// ADD CODE HERE
+function censor() {
+  let storedPairs = []
+  return (...args) => {
+    if (args.length === 2) storedPairs.push(args)
+    if (args.length === 1) {
+  		let censored = args[0]
+      storedPairs.forEach(pair => {
+        const [lookup, change] = pair
+        censored = censored.replace(lookup, change)
+      })
+      return censored
+    }
+  }
+}
+// Uncomment these to check your work!
+const changeScene = censor();
+changeScene('dogs', 'cats');
+changeScene('quick', 'slow');
+console.log(changeScene('The quick, brown fox jumps over the lazy dogs.')); // should log: 'The slow, brown fox jumps over the lazy cats.'
