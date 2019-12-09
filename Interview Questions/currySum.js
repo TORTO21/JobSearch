@@ -4,7 +4,7 @@ function regSum() {
   return subTot
 }
 
-console.log(regSum(1,2))
+// console.log(regSum(1,2))
 
 function curryFn(numArgs, fn, ctx) {
   const argsArr = [];
@@ -48,7 +48,7 @@ const currySum = curry((...args) => {
 // console.log(currySum(2, 3)(4));
 // console.log(currySum(2)(3, 4));
 // console.log(currySum(2)(3)(4));
-console.log(currySum(2, 3, 4));
+// console.log(currySum(2, 3, 4));
 
 function returnArgs(...args) {
   // var args = [].slice.call(arguments)
@@ -57,5 +57,43 @@ function returnArgs(...args) {
   return null
 }
 
-console.log(returnArgs(1,2,3))
+// console.log(returnArgs(1,2,3))
+// console.log("==================")
 
+// write a function that receives an unknown amount of numbers
+// and returns their sum, or a function that will add to the previous input of the function
+// the function should 
+
+
+function createClosureSum(...args) {
+  let allArgs = [...args]
+  let result
+  function closureSum (...args) {
+    allArgs = allArgs.concat(args)
+    if (!args.length) return allArgs.reduce((total, ele) => total + ele)
+    return closureSum
+  }
+  setTimeout(() => result = closureSum(), 100)
+  return result ? result : closureSum
+}
+
+const test1 = createClosureSum(1)(2)(3)(4)
+console.log(test1())
+setTimeout(() => console.log(test1),100) // => 10)
+// console.log(createClosureSum(1)(2)(3)(4))
+// console.log(createClosureSum(1, 2)(3, 4)) // => 10
+// console.log(createClosureSum(1, 2, 3, 4)) // => 10
+console.log("==================")
+
+// function createRecurClosure() {
+//   let count = 0
+//   function recurClosure (arg) {
+//     count++
+//     if (!arguments.length) return count
+//     return recurClosure
+//   }
+//   return recurClosure
+// }
+
+// const test2 = createRecurClosure()
+// console.log(test2(1)(2)())
