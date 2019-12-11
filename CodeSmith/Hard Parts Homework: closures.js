@@ -61,3 +61,69 @@ console.log(addByTwo(1))
 // now call addByTwo with an input of 2
 console.log(addByTwo(2))
 
+
+//--------------------------------------------------
+// Extension
+//--------------------------------------------------
+
+function once(func) {
+	let called = false
+  let firstCalled
+
+  function oncifiedFunc (...args) {
+    if (!called) {
+    	called = !called
+    	firstCalled = func(...args)
+    }
+    return firstCalled
+  }
+  return oncifiedFunc
+}
+
+const onceFunc = once(addByTwo);
+
+// UNCOMMENT THESE TO TEST YOUR WORK!
+console.log(onceFunc(4));  //should log 6
+console.log(onceFunc(10));  //should log 6
+console.log(onceFunc(9001));  //should log 6
+
+
+function after(count, func) {
+	let counter = 0
+  return () => {
+    counter++
+    if (counter >= count) return func()
+  }
+}
+
+const called = function() { console.log('hello') };
+const afterCalled = after(3, called);
+
+afterCalled(); // -> nothing is printed
+afterCalled(); // -> nothing is printed
+afterCalled(); // -> 'hello' is printed
+
+
+function delay(func, wait) {
+	return (...args) => setTimeout(() => func(...args), wait)
+}
+
+const delayedFunc = delay(afterCalled, 2000)
+delayedFunc()
+
+
+function rollCall(names) {
+  let nameIdx = 0
+	return () => {
+    if (nameIdx === names.length) console.log("Everyone accounted for") 
+    else console.log(names[nameIdx]); nameIdx++
+  }
+}
+
+// UNCOMMENT THESE TO TEST YOUR WORK!
+const rollCaller = rollCall(['Victoria', 'Juan', 'Ruth'])
+rollCaller() // -> Should log 'Victoria'
+rollCaller() // -> Should log 'Juan'
+rollCaller() // -> Should log 'Ruth'
+rollCaller() // -> Should log 'Everyone accounted for'
+
