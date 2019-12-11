@@ -67,19 +67,18 @@ function returnArgs(...args) {
 
 function createClosureSum(...args) {
   let allArgs = [...args]
-  let result
   function closureSum (...args) {
     allArgs = allArgs.concat(args)
     if (!args.length) return allArgs.reduce((total, ele) => total + ele)
     return closureSum
   }
-  setTimeout(() => result = closureSum(), 100)
-  return result ? result : closureSum
+  setTimeout(() => console.log(closureSum()))
+  return closureSum
 }
 
 const test1 = createClosureSum(1)(2)(3)(4)
-console.log(test1())
-setTimeout(() => console.log(test1),100) // => 10)
+// console.log(test1)
+// setTimeout(() => console.log(test1),200) // => 10)
 // console.log(createClosureSum(1)(2)(3)(4))
 // console.log(createClosureSum(1, 2)(3, 4)) // => 10
 // console.log(createClosureSum(1, 2, 3, 4)) // => 10
