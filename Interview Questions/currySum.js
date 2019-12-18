@@ -78,7 +78,7 @@ function createClosureSum(...args) {
 
 const test1 = createClosureSum(1)(2)(3)(4)
 // console.log(test1)
-// setTimeout(() => console.log(test1),200) // => 10)
+// setTimeout(() => console.log(test1),200  ) // => 10)
 // console.log(createClosureSum(1)(2)(3)(4))
 // console.log(createClosureSum(1, 2)(3, 4)) // => 10
 // console.log(createClosureSum(1, 2, 3, 4)) // => 10
