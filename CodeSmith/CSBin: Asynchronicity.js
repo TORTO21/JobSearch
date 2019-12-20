@@ -9,34 +9,43 @@ function testMe() {
   console.log('Partnah');
 }
 // After thinking it through, uncomment the following line to check your guess!
-// testMe(); // what order should these log out? Howdy or Partnah first?
+testMe(); // what order should these log out? Howdy or Partnah first?
+// Partnah then Howdy
 
 
 /* CHALLENGE 2 */
 
 function delayedGreet() {
   // ADD CODE HERE
+  setTimeout(() => console.log("welcome"), 3000)
 }
 // Uncomment the following line to check your work!
-// delayedGreet(); // should log (after 3 seconds): welcome
+delayedGreet(); // should log (after 3 seconds): welcome
 
 
 /* CHALLENGE 3 */
 
 function helloGoodbye() {
   // ADD CODE HERE
+  setTimeout(() => console.log("good bye"), 2000)
+  console.log("hello")
 }
 // Uncomment the following line to check your work!
-// helloGoodbye(); // should log: hello // should also log (after 3 seconds): good bye
+helloGoodbye(); // should log: hello // should also log (after 3 seconds): good bye
 
 
 /* CHALLENGE 4 */
 
 function brokenRecord() {
   // ADD CODE HERE
+  let time = 0
+  for(let i = 0; i < 5; i++) {
+  	setTimeout(() => console.log("hi again"), time)
+    time += 1000 
+  }
 }
 // Uncomment the following line to check your work!
-// brokenRecord(); // should log (every second): hi again
+brokenRecord(); // should log (every second): hi again
 
 
 /* CHALLENGE 5 */
