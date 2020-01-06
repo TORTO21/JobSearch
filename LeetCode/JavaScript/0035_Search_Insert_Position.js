@@ -52,3 +52,36 @@ console.log(searchInsertFast([1,3,5,6], 5)) // Output: 2
 console.log(searchInsertFast([1,3,5,6], 2)) // Output: 1
 console.log(searchInsertFast([1,3,5,6], 7)) // Output: 4
 console.log(searchInsertFast([1,3,5,6], 0)) // Output: 0
+console.log("=================")
+
+
+function binarySearchInsert(nums, target) {
+  if (target <= nums[0]) return 0
+  if (target >= nums[nums.length - 1]) return nums.length
+  return binarySearch(nums, target, 0, nums.length - 1);
+};
+
+function binarySearch(array, target, start, end) {
+ // If the target is less then the very last item then insert it at that item index
+ // because anything index less then that has already been confirmed to be less then the target.
+ // Otherwise insert it at that item index + 1
+ // because any index grater then that has already been confirmed to be greater then the target
+  if (start > end) return start;
+  
+  const midPoint = Math.floor((start + end)/2);
+  
+// found target
+  if (array[midPoint] === target) return midPoint;
+  
+// search the left side
+  if (array[midPoint] > target) return binarySearch(array, target, start, midPoint - 1);
+  // search the right side
+  if (array[midPoint] < target) return binarySearch(array, target, midPoint + 1, end);
+}
+
+
+console.log(binarySearchInsert([1,3,5,6], 5)) // Output: 2
+console.log(binarySearchInsert([1,3,5,6], 2)) // Output: 1
+console.log(binarySearchInsert([1,3,5,6], 7)) // Output: 4
+console.log(binarySearchInsert([1,3,5,6], 0)) // Output: 0
+console.log("=================")
