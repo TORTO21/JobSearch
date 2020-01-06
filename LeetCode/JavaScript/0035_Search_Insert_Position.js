@@ -40,3 +40,15 @@ console.log(searchInsert([1,3,5,6], 5)) // Output: 2
 console.log(searchInsert([1,3,5,6], 2)) // Output: 1
 console.log(searchInsert([1,3,5,6], 7)) // Output: 4
 console.log(searchInsert([1,3,5,6], 0)) // Output: 0
+console.log("=================")
+
+
+
+var searchInsertFast = function(nums, target) {
+  return nums.includes(target) ? nums.indexOf(target) : nums.filter(elem => elem < target).length;
+};
+
+console.log(searchInsertFast([1,3,5,6], 5)) // Output: 2
+console.log(searchInsertFast([1,3,5,6], 2)) // Output: 1
+console.log(searchInsertFast([1,3,5,6], 7)) // Output: 4
+console.log(searchInsertFast([1,3,5,6], 0)) // Output: 0
