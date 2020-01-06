@@ -26,5 +26,17 @@
  */
 
 var searchInsert = function(nums, target) {
-    
+    // - iterate through the array
+    for (let i = 0; i < nums.length; i++) {
+        let value = nums[i]
+        // if the value is equal or greater to the target, return the index
+        if (target <= value) return i
+    }
+    // if the loop exits without return, return length
+    return nums.length
 };
+
+console.log(searchInsert([1,3,5,6], 5)) // Output: 2
+console.log(searchInsert([1,3,5,6], 2)) // Output: 1
+console.log(searchInsert([1,3,5,6], 7)) // Output: 4
+console.log(searchInsert([1,3,5,6], 0)) // Output: 0
