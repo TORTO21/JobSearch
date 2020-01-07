@@ -81,3 +81,36 @@ console.log(zigZagConvert("AB", 2))             // => "AB"
 console.log(zigZagConvert("ABC", 2))            // => "ACB"
 console.log(zigZagConvert("ABC",  3))           // => "ABC"
 console.log(zigZagConvert("ABC",  4))           // => "ABC"
+console.log("====================")
+
+
+
+
+var zigZagConvertClean = function(s, numRows) {
+  if (numRows === 1) return s
+  let result = ""
+  let period = numRows * 2 - 2
+  let diff1 = period, diff2 = 0
+  for (let i = 0; i < numRows; i++) {
+    let currStrIdx = i
+    let useFirst = diff2 === 0 ? true : diff1 === 0 ? false : true
+    while (currStrIdx < s.length) {
+      result += s[currStrIdx]
+      useFirst ? currStrIdx += diff1 : currStrIdx += diff2
+      useFirst = diff2 === 0 ? true : diff1 === 0 ? false : !useFirst
+    }
+    diff1 -= 2
+    diff2 += 2
+  }
+  return result
+};
+
+// console.log(zigZagConvertClean("PAYPALISHIRING", 1)) // => "PAHNAPLSIIGYIR"
+console.log(zigZagConvertClean("PAYPALISHIRING", 3)) // => "PAHNAPLSIIGYIR"
+// console.log(zigZagConvertClean("PAYPALISHIRING", 4)) // => "PINALSIGYAHRPI"
+// console.log(zigZagConvertClean("PAYPALISHIRING", 5)) // => "PHASIYIRPLIGAN"
+// console.log(zigZagConvertClean("A", 1))              // => "A"
+// console.log(zigZagConvertClean("AB", 2))             // => "AB"
+// console.log(zigZagConvertClean("ABC", 2))            // => "ACB"
+// console.log(zigZagConvertClean("ABC",  3))           // => "ABC"
+// console.log(zigZagConvertClean("ABC",  4))           // => "ABC"
