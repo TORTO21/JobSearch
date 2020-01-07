@@ -55,13 +55,3 @@ const sayCurrentCount = function (numberString) {
   }
   return newString
 }
-
-console.log(countAndSay(1))
-console.log(countAndSay(2))
-console.log(countAndSay(3))
-console.log(countAndSay(4))
-console.log(countAndSay(5))
-console.log(countAndSay(6))
-
-
-// console.log(sayCurrentCount("21"))
