@@ -13,8 +13,6 @@
 
 // Note: Each term of the sequence of integers will be represented as a string.
 
- 
-
 // Example 1:
 
 // Input: 1
@@ -30,6 +28,40 @@
  * @param {number} n
  * @return {string}
  */
+
 var countAndSay = function(n) {
-    
+  // use while loop to perform function until number of count equals n
+  // track curr string
+  // work on a new string
+  // update new string to curr string when done working
+  // return currString when out of loop
+  let currString = "1"
+  for (let i = 1; i < n; i ++) {
+    currString = sayCurrentCount(currString)
+  }
+  return currString
 };
+
+const sayCurrentCount = function (numberString) {
+  let newString = ""
+  let charCt = 1
+  for (let i = 0; i < numberString.length; i++) {
+    if (numberString[i] === numberString[i + 1]) {
+      charCt++
+    } else {
+      newString += charCt + numberString[i]
+      charCt = 1
+    }
+  }
+  return newString
+}
+
+console.log(countAndSay(1))
+console.log(countAndSay(2))
+console.log(countAndSay(3))
+console.log(countAndSay(4))
+console.log(countAndSay(5))
+console.log(countAndSay(6))
+
+
+// console.log(sayCurrentCount("21"))
