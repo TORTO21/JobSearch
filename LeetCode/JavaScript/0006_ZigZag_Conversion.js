@@ -114,3 +114,28 @@ console.log(zigZagConvertClean("PAYPALISHIRING", 3)) // => "PAHNAPLSIIGYIR"
 // console.log(zigZagConvertClean("ABC", 2))            // => "ACB"
 // console.log(zigZagConvertClean("ABC",  3))           // => "ABC"
 // console.log(zigZagConvertClean("ABC",  4))           // => "ABC"
+
+
+
+// Clearest solution
+var zigZagConvertClear = function(s, numRows) {
+  if (numRows === 1) return s
+  let result = ""
+  let period = numRows * 2 - 2
+  let diff1 = period, diff2 = 0
+  for (let i = 0; i < numRows; i++) {
+    let currStrIdx = i
+    let useFirst
+    while (currStrIdx < s.length) {
+      useFirst = diff2 === 0 ? true : diff1 === 0 ? false : useFirst
+      result += s[currStrIdx]
+      useFirst ? currStrIdx += diff1 : currStrIdx += diff2
+      useFirst = !useFirst
+    }
+    diff1 -= 2
+    diff2 += 2
+  }
+  return result
+};
+
+console.log(zigZagConvertClear("PAYPALISHIRING", 3)) // => "PAHNAPLSIIGYIR"
