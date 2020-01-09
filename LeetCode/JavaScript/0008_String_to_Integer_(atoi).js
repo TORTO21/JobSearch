@@ -46,5 +46,25 @@
  */
 
 var myAtoi = function(str) {
+  const INT_MAX = 2**31 - 1
+  const INT_MIN = -(2**31)
+  const ints = "0123456789"
+  const signs = "+-"
+  const sign
+  let signed = false
+  for (let char of str) {
+    if (char === " ") continue
+    if (!(ints + signs).includes(char)) return 0
+    if (signs.includes(char)) {
+      signed = true
+      sign = char
+    }
+  }
 
 };
+
+
+console.log(myAtoi("42"))
+console.log(myAtoi("   -42"))
+// console.log(myAtoi("4193 with words"))
+console.log(myAtoi("words and 987"))
